@@ -1,0 +1,56 @@
+---
+- hosts: all
+
+  vars_files:
+    - squid_vars.yml
+    - setup_vars.yml
+
+  tasks:
+
+    - name: Update local repositories cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Make sure aptitude is installed
+      apt:
+        name: aptitude
+        state: present
+
+    - name: Make sure Squid is installed
+      apt:
+        name: squid
+        state: present
+
+    - name: Upload Squid configuration & make a backup copy of the original
+      template:
+        src: "squid.conf.j2"
+        dest: "/etc/squid/squid.conf"
+        backup: yes
+
+    - name: Set local HTTP proxy for apt
+      lineinfile:
+        path: "/etc/apt/apt.conf.d/proxy.conf"
+        regexp: "^Acquire::http::Proxy"
+        line: 'Acquire::http::Proxy "{{local_proxy_url}}";'
+        state: present
+        create: yes
+
+    - name: Make sure Squid service is enabled and restarted
+      service:
+        name: squid
+        state: restarted
+        enabled: yes
+
+    - name: Apply package updates
+      apt:
+        name: '*'
+        state: latest
+        install_recommends: yes
+      register: apt_output
+
+    - name: Reboot system to activate new kernel
+      command: "shutdown -r --no-wall +1"
+      async: 180
+      poll: 15
+      when: (apt_output.changed == True) and (apt_output.stdout.find('linux-image') != -1)

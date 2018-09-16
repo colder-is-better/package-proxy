@@ -1,0 +1,12 @@
+# do not track this directory
+
+.vagrant
+
+# do not track virtual disk images
+
+*.vdi
+*.vmdk
+
+# do not track Ansible 'retry' files
+
+*.retry

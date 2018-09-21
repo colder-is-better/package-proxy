@@ -1,7 +1,0 @@
-ram_size: 1024
-core_count: 2
-
-proxy_fqdn: "theproxy.local.is"
-proxy_ipv4: "192.168.254.254"
-
-local_proxy_url: "http://127.0.0.1:3128"

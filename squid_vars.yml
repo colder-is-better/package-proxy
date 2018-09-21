@@ -1,7 +1,0 @@
-local_network: "192.168.254.0/24"
-
-object_size_upper_limit: 1024
-cache_size_upper_limit: 16384
-
-cache_dir_path: "/var/spool/squid"
-coredump_dir_path: "/var/spool/squid"

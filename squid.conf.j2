@@ -27,7 +27,7 @@ http_port 3128
 maximum_object_size {{ object_size_upper_limit }} MB
 
 cache_dir aufs {{ cache_dir_path }} {{ cache_size_upper_limit }} 32 256
-coredump_dir {{ coredump_dir_path }}
+coredump_dir {{ cache_dir_path }}
 
 refresh_pattern ^ftp: 1440 20% 10080
 refresh_pattern ^gopher: 1440 0% 1440

@@ -1,0 +1,5 @@
+ram_size: 1024
+core_count: 2
+
+fqdn: "theproxy.local.is"
+ipaddr: "192.168.254.254"

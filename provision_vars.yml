@@ -1,0 +1,9 @@
+squid_conf_full_path: "/etc/squid/squid.conf"
+
+local_network: "192.168.0.0/16"
+
+object_size_upper_limit: 1024
+cache_size_upper_limit: 16384
+cache_dir_path: "/var/spool/squid"
+
+use_local_squid: true

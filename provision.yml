@@ -2,8 +2,7 @@
 - hosts: all
 
   vars_files:
-    - squid_vars.yml
-    - setup_vars.yml
+    - provision_vars.yml
 
   tasks:
 
@@ -25,16 +24,25 @@
     - name: Upload Squid configuration & make a backup copy of the original
       template:
         src: "squid.conf.j2"
-        dest: "/etc/squid/squid.conf"
+        dest: "{{ squid_conf_full_path }}"
         backup: yes
+
+    - name: Make sure {{ cache_dir_path }} exists
+      file:
+        path: "{{ cache_dir_path }}"
+        state: directory
+        owner: proxy
+        group: proxy
+        mode: 0755
 
     - name: Set local HTTP proxy for apt
       lineinfile:
         path: "/etc/apt/apt.conf.d/proxy.conf"
         regexp: "^Acquire::http::Proxy"
-        line: 'Acquire::http::Proxy "{{local_proxy_url}}";'
+        line: 'Acquire::http::Proxy "http://127.0.0.1:3128";'
         state: present
         create: yes
+      when: (use_local_squid is defined) and (use_local_squid == true)
 
     - name: Make sure Squid service is enabled and restarted
       service:

@@ -30,4 +30,4 @@ To instantiate a Debian based VirtualBox VM with Squid preconfigured, just type:
 
 	vagrant up
 
-_**Note:** This repository has been created to complement a HOWTO article for deltaHacker magazine (text in Greek, active subscription may be required)_
+_**Note:** This repository has been created to complement a [HOWTO article](https://deltahacker.gr/?p=18105) for deltaHacker magazine (text in Greek, active subscription may be required)_

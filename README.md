@@ -1,4 +1,4 @@
-# Quickly setup a Squid proxy for Linux packages
+# Quickly setup a Squid proxy for caching Linux packages
 
 We show two simple methods for quickly setting up Squid on a Debian-based physical/virtual host, for caching packages of (ephemeral) Linux systems. To apply any of those two methods you need a fairly modern Linux system with [Ansible](https://www.ansible.com) installed. Should you chose to apply the second method, i.e., have a VM as a local proxy for other VMs, then you will also need [VirtualBox](https://www.ansible.com) and [Vagrant](http://vagrantup.com).
 

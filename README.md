@@ -17,6 +17,8 @@ In file `hosts` set the IP or the FQDN of the proxy host (change `1.2.3.4`), als
 
 	ansible-playbook -b -i hosts provision.yml
 
+When pointing clients to the proxy, please have in mind that by default Squid listens for connections on port 3128/TCP.
+
 ### Use Vagrant to automatically create a VirtualBox Debian VM with Squid preconfigured
 
 In addition to modifying `provision_vars.yml` (see above), you will probably need to change a couple of parameters in `machine_vars.yml` also.
@@ -29,5 +31,7 @@ In addition to modifying `provision_vars.yml` (see above), you will probably nee
 To instantiate a Debian based VirtualBox VM with Squid preconfigured, just type:
 
 	vagrant up
+
+Again, point your proxy clients to `ipaddr:3128`.
 
 _**Note:** This repository has been created to complement a [HOWTO article](https://deltahacker.gr/?p=18105) for deltaHacker magazine (text in Greek, active subscription may be required)_

@@ -4,6 +4,9 @@
   vars_files:
     - provision_vars.yml
 
+  vars:
+    - local_proxy_url: "{{ 'http://127.0.0.1:3128' if ((use_local_squid is defined) and use_local_squid == true) else '' }}"
+
   tasks:
 
     - name: Update local repositories cache
@@ -35,14 +38,13 @@
         group: proxy
         mode: 0755
 
-    - name: Set local HTTP proxy for apt
+    - name: Set local HTTP proxy for apt to '{{ local_proxy_url }}'
       lineinfile:
         path: "/etc/apt/apt.conf.d/proxy.conf"
         regexp: "^Acquire::http::Proxy"
-        line: 'Acquire::http::Proxy "http://127.0.0.1:3128";'
+        line: 'Acquire::http::Proxy "{{ local_proxy_url }}";'
         state: present
         create: yes
-      when: (use_local_squid is defined) and (use_local_squid == true)
 
     - name: Make sure Squid service is enabled and restarted
       service:

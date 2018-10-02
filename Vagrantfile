@@ -9,8 +9,9 @@ Vagrant.configure(2) do |config|
 # ===== General Vagrant VM configuration
 
   config.vm.box = "sub0/debian950srv"
-  config.ssh.insert_key = false
+  config.vm.box_check_update = true
   config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.ssh.insert_key = false
   config.vm.provider :virtualbox do |tmpl|
     tmpl.memory = p["ram_size"]
     tmpl.cpus = p["core_count"]
